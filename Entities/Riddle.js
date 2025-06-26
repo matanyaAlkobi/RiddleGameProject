@@ -28,6 +28,3 @@ export class Riddle {
         console.log(chalk.green("Correct answer!!!"))
     }
 }
-
-const riddle1 = new Riddle(1, "Simple Math", "What is 2 + 2?", "4");
-riddle1.ask();
