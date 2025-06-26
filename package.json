@@ -15,6 +15,7 @@
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/matanyaAlkobi/RiddleGameProject/issues"
   },

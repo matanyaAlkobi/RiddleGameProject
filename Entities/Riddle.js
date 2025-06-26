@@ -1,14 +1,13 @@
 
+import chalk from "chalk";
 import readline from "readline-sync";
 
-const name = readline.question('What is your name? ');
-console.log(`Hello, ${name}!`);
 
 
 
 
 
-class  Riddles {
+export class Riddle {
     constructor(ID, name, taskDescription,correctAnswer){
     this.ID = ID;
     this.name =  name;
@@ -17,16 +16,18 @@ class  Riddles {
     }
 
     ask(){
+        let answer;
         do{
         console.log(`question number ${this.ID}:  ${this.taskDescription}`)
-        const answer = readline.question("What is your answer to the question? ")
-        if(answer != correctAnswer){
-            
+        answer = readline.question("What is your answer to the question? ")
+        if(answer != this.correctAnswer){
+            console.log(chalk.red("wrong answer: try again"))
         }
         }
-        while(answer != correctAnswer)
-
-
+        while(answer != this.correctAnswer)
+        console.log(chalk.green("Correct answer!!!"))
     }
-
 }
+
+const riddle1 = new Riddle(1, "Simple Math", "What is 2 + 2?", "4");
+riddle1.ask();
