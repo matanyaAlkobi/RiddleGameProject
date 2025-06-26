@@ -2,7 +2,12 @@
 import chalk from "chalk";
 import readline from "readline-sync";
 
-class  Riddle {
+
+
+
+
+
+export class Riddle {
     constructor(ID, name, taskDescription,correctAnswer){
     this.ID = ID;
     this.name =  name;
