@@ -18,4 +18,16 @@ Players answer a series of riddles and the game tracks the time taken to solve e
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/riddle-game.git
+   git clone https://github.com/matanyaAlkobi/RiddleGameProject.git
+
+
+## Technologies Used
+1. JavaScript (ES6 modules)
+2. Node.js
+3. readline-sync for synchronous user input
+4. chalk for colored terminal output
+
+## Author
+name: Matanya alkobi
+email:  matanor123456@gmail.com
+
