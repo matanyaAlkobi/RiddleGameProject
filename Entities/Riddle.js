@@ -2,12 +2,17 @@
 import chalk from "chalk";
 import readline from "readline-sync";
 
-
-
-
-
-
+/**
+ * Represents a riddle or question in the game.
+ */
 export class Riddle {
+        /**
+     * Creates a new Riddle instance.
+     * @param {number} ID - The unique identifier for the riddle.
+     * @param {string} name - The type or category of the riddle.
+     * @param {string} taskDescription - The text of the riddle/question.
+     * @param {string} correctAnswer - The correct answer to the riddle.
+     */
     constructor(ID, name, taskDescription,correctAnswer){
     this.ID = ID;
     this.name =  name;
@@ -15,6 +20,10 @@ export class Riddle {
     this.correctAnswer = correctAnswer;
     }
 
+        /**
+     * Asks the riddle to the player, prompting them until the correct answer is given.
+     * Displays hints for wrong answers and confirms when the answer is correct.
+     */
     ask(){
         let answer;
         do{
