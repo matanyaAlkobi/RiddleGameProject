@@ -18,7 +18,8 @@ export class Riddle {
     ask(){
         let answer;
         do{
-        console.log(`question number ${this.ID}:  ${this.taskDescription}`)
+        console.log(`Question type: ${this.name}`)
+        console.log(`question number-${this.ID}: ${this.taskDescription}`)
         answer = readline.question("What is your answer to the question? ")
         if(answer != this.correctAnswer){
             console.log(chalk.red("wrong answer: try again"))
