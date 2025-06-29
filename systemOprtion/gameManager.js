@@ -1,6 +1,6 @@
+import { getPlayerName, getDifficultyChoice, printWelcome } from "./uiManager.js";
+import {createRiddleFromData, handleRiddleSession} from "./riddleService.js"
 import  { allRiddles,Player, Riddle } from "../Modules/allModules.js";
-import chalk, { foregroundColorNames } from "chalk";
-import readline from "readline-sync";
 
 /**
  * Starts the riddle game.
@@ -10,8 +10,8 @@ import readline from "readline-sync";
  * - Displays the total and average time at the end.
  */
 export function startGame(){
-    console.log("Welcome to our game");
-    const playerName = readline.question("What is your name? ")
+    printWelcome()
+    const playerName = getPlayerName()
     const  player = new  Player(playerName)
     const levelchoise =  getDifficultyChoice()
     const selectedRiddles =  allRiddles.filter(riddle =>  riddle.difficulty === levelchoise)
@@ -19,43 +19,5 @@ export function startGame(){
     riddleInstances.forEach(riddle => {handleRiddleSession(riddle, player)});
     player.showStatus();
 }
-
-/**
- * Converts plain riddle data into a Riddle instance.
- * @param {Object} rid - Riddle data object.
- * @returns {Riddle} A Riddle instance.
- */
-function createRiddleFromData(rid){
-    return new Riddle(rid.id, rid.name, rid.taskDescription, rid.correctAnswer); 
-}
-
-/**
- * Handles a single riddle session:
- * - Records start time
- * - Asks the riddle
- * - Records end time and updates player's time log
- * @param {Riddle} riddle - The riddle to present.
- * @param {Player} player - The player answering.
- */
-function handleRiddleSession(riddle, player){
-    const start = Date.now();
-    riddle.ask();
-    const end = Date.now();
-    player.recordTime(start,end);    
-}
-
-function getDifficultyChoice(){
-    let choice;
-    do{
-        choice = readline.question("choose difficulty easy or medium or hard: ");
-            if((choice != "easy") && (choice != "medium") && (choice != "hard")){
-                console.log(chalk.red("Invalid choice. Please enter easy, medium, or hard."))
-            }
-    }
-    while((choice != "easy") && (choice != "medium") && (choice != "hard"));
-    return choice;
-}
-
-startGame();
 
 
