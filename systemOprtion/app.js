@@ -1,26 +1,29 @@
-import  { rid1, rid2,rid3,Player, Riddle } from "../Modules/allModules.js";
-import chalk from "chalk";
+import  { allRiddles,Player, Riddle } from "../Modules/allModules.js";
+import chalk, { foregroundColorNames } from "chalk";
 import readline from "readline-sync";
 
-function run(){
+
+function startGame(){
     console.log("Welcome to our game");
     const playerName = readline.question("What is your name? ")
-    const  player1 = new  Player(playerName)
-    createARiddle(rid1, player1);
-    createARiddle(rid2, player1);
-    createARiddle(rid3, player1);
-    player1.showStatus();
+    const  player = new  Player(playerName)
+    const riddleInstances = allRiddles.map(riddle => createRiddleFromData(riddle));
+    riddleInstances.forEach(riddle => {handleRiddleSession(riddle, player)});
+    player.showStatus();
 }
 
 
-function createARiddle(rid,player){
-    const r = new Riddle(rid.id, rid.name, rid.taskDescription, rid.correctAnswer);
+function createRiddleFromData(rid){
+    return new Riddle(rid.id, rid.name, rid.taskDescription, rid.correctAnswer); 
+}
+
+function handleRiddleSession(riddle, player){
     const start = Date.now();
-    r.ask();
+    riddle.ask();
     const end = Date.now();
-    player.recordTime(start,end);
+    player.recordTime(start,end);    
 }
 
-run();
+startGame();
 
 
