@@ -9,11 +9,13 @@ import readline from "readline-sync";
  * - Runs through all riddles one by one.
  * - Displays the total and average time at the end.
  */
-function startGame(){
+export function startGame(){
     console.log("Welcome to our game");
     const playerName = readline.question("What is your name? ")
     const  player = new  Player(playerName)
-    const riddleInstances = allRiddles.map(riddle => createRiddleFromData(riddle));
+    const levelchoise =  getDifficultyChoice()
+    const selectedRiddles =  allRiddles.filter(riddle =>  riddle.difficulty === levelchoise)
+    const riddleInstances = selectedRiddles.map(riddle => createRiddleFromData(riddle));
     riddleInstances.forEach(riddle => {handleRiddleSession(riddle, player)});
     player.showStatus();
 }
@@ -40,6 +42,18 @@ function handleRiddleSession(riddle, player){
     riddle.ask();
     const end = Date.now();
     player.recordTime(start,end);    
+}
+
+function getDifficultyChoice(){
+    let choice;
+    do{
+        choice = readline.question("choose difficulty easy or medium or hard: ");
+            if((choice != "easy") && (choice != "medium") && (choice != "hard")){
+                console.log(chalk.red("Invalid choice. Please enter easy, medium, or hard."))
+            }
+    }
+    while((choice != "easy") && (choice != "medium") && (choice != "hard"));
+    return choice;
 }
 
 startGame();
