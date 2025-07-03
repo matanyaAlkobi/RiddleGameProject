@@ -1,4 +1,12 @@
 import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const dbPath = path.resolve(__dirname, "../riddelsDB/db.txt");
+
 
 /**
  * Reads a JSON-formatted text file from the given path,
@@ -8,15 +16,16 @@ import fs from "fs/promises";
  */
 export default async function loadRiddleDatabase() {
     try {
-        const riddelsData = await fs.readFile("./riddels/riddelsDB/db.txt", "utf-8")
+        const riddelsData = await fs.readFile(dbPath, "utf-8")
 
         return JSON.parse(riddelsData)
     }
     catch (err) {
-        return err.message;
+        throw new Error("Failed to load riddles: " + err.message);
     }
 }
 
-// export const riddles = await readFile()
+// export const riddles = await loadRiddleDatabase()
+// console.log(riddles)
 
 
