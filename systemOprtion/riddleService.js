@@ -6,7 +6,7 @@ import { Riddle } from "../Modules/allModules.js";
  * @returns {Riddle} A Riddle instance.
  */
 export function createRiddleFromData(rid){
-    return new Riddle(rid.id, rid.name, rid.taskDescription, rid.correctAnswer); 
+    return new Riddle(rid.id, rid.name, rid.taskDescription, rid.correctAnswer,rid.difficulty); 
 }
 
 /**

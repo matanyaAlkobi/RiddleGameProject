@@ -12,12 +12,14 @@ export class Riddle {
      * @param {string} name - The type or category of the riddle.
      * @param {string} taskDescription - The text of the riddle/question.
      * @param {string} correctAnswer - The correct answer to the riddle.
+     * @param {string} difficulty - Difficulty level of the riddle
      */
-    constructor(ID, name, taskDescription,correctAnswer){
+    constructor(ID, name, taskDescription,correctAnswer, difficulty,){
     this.ID = ID;
     this.name =  name;
     this.taskDescription = taskDescription;
     this.correctAnswer = correctAnswer;
+    this.difficulty = difficulty;
     }
 
         /**
@@ -25,6 +27,7 @@ export class Riddle {
      * Displays hints for wrong answers and confirms when the answer is correct.
      */
     ask(){
+        
         let answer;
         do{
         console.log(`Question type: ${this.name}`)
@@ -36,5 +39,9 @@ export class Riddle {
         }
         while(answer != this.correctAnswer)
         console.log(chalk.green("Correct answer!!!"))
+    }
+
+    applyTimePenalty(){
+        
     }
 }
