@@ -53,23 +53,23 @@ email:  matanor123456@gmail.com
 
 - Entities
   - index.js
-- - player.js
-- - Riddle.js
+  - player.js
+  - Riddle.js
 
 - Modulles
-- - allModules.js
+  - allModules.js
 
 - riddels
-- - index.js
-- - riddle1.js
-- - riddle2.js
-- - riddle3.js
+  - index.js
+  - riddle1.js
+  - riddle2.js
+  - riddle3.js
  
 - systemOprtion
-- - gameManager.js
-- - main.js
-- - riddleService.js
-- - riddleService.js
+  - gameManager.js
+  - main.js
+  - riddleService.js
+  - riddleService.js
 
 - gitignore
 
