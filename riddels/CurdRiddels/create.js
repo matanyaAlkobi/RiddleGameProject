@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import chalk from "chalk";
 import loadRiddleDatabase from "./read.js"
+import { getInputFromUser } from "../../systemOprtion/uiManager.js"
 
 // Set up the path to the riddle database file
 const __filename = fileURLToPath(import.meta.url);
@@ -12,20 +13,7 @@ const __dirname = path.dirname(__filename);
 const dbPath = path.resolve(__dirname, "../riddelsDB/db.txt");
 
 
-/**
- * Prompt user until a non-empty string is entered.
- * @param {string} query - The message shown to the user.
- * @returns {string} - The user's input.
- */
-function getInputFromUser(query) {
-  let data
-  do {
-    data = readline.question(query);
-    if (!data) { console.log(chalk.red("Error receiving data, please enter again.")) }
-  }
-  while (!data)
-  return data;
-}
+
 
 /**
  * Prompt user for a valid difficulty level (easy, medium, hard).
@@ -33,8 +21,12 @@ function getInputFromUser(query) {
  */
 function getLevel() {
   let difficulty;
+
   do {
     difficulty = readline.question("What is the difficulty level?: (hard or easy or medium)");
+    if (!["hard", "easy", "medium"].includes(difficulty.toLowerCase())) {
+      console.log(chalk.red("Error reading the level, please enter a level that matches the options given."))
+    }
   }
   while (!["hard", "easy", "medium"].includes(difficulty.toLowerCase()))
   return difficulty.toLowerCase();
@@ -47,8 +39,9 @@ function getLevel() {
  * @returns {Object} - New riddle object.
  */
 function createRiddle(riddles) {
+  const maxID = riddles.length > 0 ? Math.max(...riddles.map(r => r.id)) : 0;
   const newObj = {}
-  newObj.id = riddles.length + 1;
+  newObj.id = maxID + 1
   newObj.name = getInputFromUser("Enter riddle name: ");
   newObj.taskDescription = getInputFromUser("enter description: ");
   newObj.correctAnswer = getInputFromUser("Enter a correct answer: ");
@@ -62,7 +55,7 @@ function createRiddle(riddles) {
  * @param {Array} riddles - Array of all riddle objects to be saved.
  * @returns {Promise<void>}
  */
-async function saveRiddlesToDB(riddles) {
+export async function saveRiddlesToDB(riddles) {
   try {
     await fs.writeFile(dbPath, JSON.stringify(riddles, null, 2));
     console.log(chalk.green("The new puzzle has been successfully entered into the database."))
@@ -79,7 +72,7 @@ async function saveRiddlesToDB(riddles) {
  * loads database, collects new riddle, saves it.
  * @returns {Promise<void>}
  */
-export default async function createMenager() {
+export async function createMenager() {
   try {
     const riddles = await loadRiddleDatabase();
     const newObj = createRiddle(riddles);
@@ -87,7 +80,7 @@ export default async function createMenager() {
     await saveRiddlesToDB(riddles);
   }
   catch (err) {
-    console.log(chalk.red("Error: " + err.message));
+    throw new Error(chalk.red("Error: " + err.message));
   }
 
 }
