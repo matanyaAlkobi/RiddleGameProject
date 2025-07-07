@@ -52,7 +52,7 @@ email:  matanor123456@gmail.com
 ## Folder Structure
 
 - Entities
- - index.js
+  - index.js
 - - player.js
 - - Riddle.js
 
