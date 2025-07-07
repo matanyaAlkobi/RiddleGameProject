@@ -1,31 +1,9 @@
 // Imports required modules for file system, input handling, paths, and styling
 import readline from "readline-sync";
 import chalk from "chalk";
-import loadRiddleDatabase from "./read.js"
-import { getInputFromUser } from "../../systemOprtion/uiManager.js"
-import {writeRiddlesToFile} from "./saveRiddlesToDB.js"
-
-
-
-
-
-
-/**
- * Prompt user for a valid difficulty level (easy, medium, hard).
- * @returns {string} - The selected difficulty level.
- */
-function getLevel() {
-  let difficulty;
-
-  do {
-    difficulty = readline.question("What is the difficulty level?: (hard or easy or medium)");
-    if (!["hard", "easy", "medium"].includes(difficulty.toLowerCase())) {
-      console.log(chalk.red("Error reading the level, please enter a level that matches the options given."))
-    }
-  }
-  while (!["hard", "easy", "medium"].includes(difficulty.toLowerCase()))
-  return difficulty.toLowerCase();
-}
+import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
+import { getInputFromUser, getDifficultyChoice} from "../../client/system Opretion/uiManager.js"
+import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 
 /**
@@ -40,12 +18,9 @@ function createRiddle(riddles) {
   newObj.name = getInputFromUser("Enter riddle name: ");
   newObj.taskDescription = getInputFromUser("enter description: ");
   newObj.correctAnswer = getInputFromUser("Enter a correct answer: ");
-  newObj.difficulty = getLevel();
+  newObj.difficulty = getDifficultyChoice();
   return newObj;
 }
-
-
-
 
 
 /**

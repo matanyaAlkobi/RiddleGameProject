@@ -10,8 +10,6 @@ const __dirname = path.dirname(__filename);
 const dbPath = path.resolve(__dirname, "../riddelsDB/db.txt");
 
 
-
-
 /**
  * Save riddles array to the database file.
  * @param {Array} riddles - Array of all riddle objects to be saved.
