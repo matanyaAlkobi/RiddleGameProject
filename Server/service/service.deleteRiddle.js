@@ -1,6 +1,6 @@
-import loadRiddleDatabase from "./read.js"
-import { getInputFromUser } from "../../systemOprtion/uiManager.js"
-import {writeRiddlesToFile} from "./saveRiddlesToDB.js"
+import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
+import { getInputFromUser } from "../../client/system Opretion/uiManager.js"
+import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 
 /**
@@ -19,7 +19,7 @@ export async function deleteRiddleById(){
     writeRiddlesToFile(updatedRiddles);
     }
     catch(err){
-        console.error("Error deleting riddle:", err.message);
+        return new Error("Error deleting riddle:", err.message);
     }
 }
 await deleteRiddleById();

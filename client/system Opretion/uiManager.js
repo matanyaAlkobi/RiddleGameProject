@@ -20,14 +20,21 @@ export function getInputFromUser(query) {
   return data;
 }
 
+
+/**
+ * Prompt user for a valid difficulty level (easy, medium, hard).
+ * @returns {string} - The selected difficulty level.
+ */
 export function getDifficultyChoice() {
-    let choice;
-    do {
-        choice = readline.question("choose difficulty easy or medium or hard: ");
-        if ((choice != "easy") && (choice != "medium") && (choice != "hard")) {
-            console.log(chalk.red("Invalid choice. Please enter easy, medium, or hard."))
-        }
+  let difficulty;
+
+  do {
+    difficulty = readline.question("What is the difficulty level?: (hard or easy or medium)");
+    if (!["hard", "easy", "medium"].includes(difficulty.toLowerCase())) {
+      console.log(chalk.red("Error reading the level, please enter a level that matches the options given."))
     }
-    while ((choice != "easy") && (choice != "medium") && (choice != "hard"));
-    return choice;
+  }
+  while (!["hard", "easy", "medium"].includes(difficulty.toLowerCase()))
+  return difficulty.toLowerCase();
 }
+
