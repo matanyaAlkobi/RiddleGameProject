@@ -1,5 +1,4 @@
 // Imports required modules for file system, input handling, paths, and styling
-import fs from "fs/promises";
 import readline from "readline-sync";
 import chalk from "chalk";
 import loadRiddleDatabase from "./read.js"

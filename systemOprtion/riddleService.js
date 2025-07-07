@@ -21,5 +21,5 @@ export function handleRiddleSession(riddle, player){
     const start = Date.now();
     riddle.ask();
     const end = Date.now();
-    player.recordTime(start,end);    
+    player.recordTime(start,end); 
 }
