@@ -1,4 +1,4 @@
-import { getPlayerName, getDifficultyChoice, printWelcome } from "./uiManager.js";
+import { getInputFromUser, getDifficultyChoice, printWelcome } from "./uiManager.js";
 import {createRiddleFromData, handleRiddleSession} from "./riddleService.js"
 import  { allRiddles,Player, Riddle } from "../Modules/allModules.js";
 
@@ -11,7 +11,7 @@ import  { allRiddles,Player, Riddle } from "../Modules/allModules.js";
  */
 export function startGame(){
     printWelcome();
-    const playerName = getPlayerName();
+    const playerName = getInputFromUser();
     const  player = new  Player(playerName);
     const levelchoise =  getDifficultyChoice();
     const selectedRiddles =  allRiddles.filter(riddle =>  riddle.difficulty === levelchoise);

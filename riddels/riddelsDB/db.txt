@@ -1,26 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Easy Math",
-    "taskDescription": "What is 5 + 3?",
-    "correctAnswer": "8",
-    "difficulty": "easy"
-  },
-  {
-    "id": 2,
-    "name": "Friendly question",
-    "taskDescription": "What is my  name? ",
-    "correctAnswer": "matanya",
-    "difficulty": "medium"
-  },
-  {
-    "id": 3,
-    "name": "medium Math",
-    "taskDescription": "What is 8 * 5?",
-    "correctAnswer": "40",
-    "difficulty": "hard"
-  },
-  {
     "id": 4,
     "name": "aa",
     "taskDescription": "gg",
@@ -32,6 +11,34 @@
     "name": "f",
     "taskDescription": "yh",
     "correctAnswer": "gg",
+    "difficulty": "hard"
+  },
+  {
+    "id": 6,
+    "name": "m",
+    "taskDescription": "d",
+    "correctAnswer": "d",
+    "difficulty": "hard"
+  },
+  {
+    "id": 6,
+    "name": "j",
+    "taskDescription": "d",
+    "correctAnswer": "d",
+    "difficulty": "hard"
+  },
+  {
+    "id": 7,
+    "name": "j",
+    "taskDescription": "s",
+    "correctAnswer": "d",
+    "difficulty": "hard"
+  },
+  {
+    "id": 8,
+    "name": "2",
+    "taskDescription": "3",
+    "correctAnswer": "4",
     "difficulty": "hard"
   }
 ]

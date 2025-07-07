@@ -5,14 +5,19 @@ export function printWelcome() {
     console.log("Welcome to our game!");
 }
 
-export function getPlayerName() {
-    let name;
-    do {
-        name = readline.question("What is your name? ");
-        if (!name) { console.log(chalk.red("Error entering name: please enter again")) };
-    }
-    while (!name)
-    return name;
+/**
+ * Prompt user until a non-empty string is entered.
+ * @param {string} query - The message shown to the user.
+ * @returns {string} - The user's input.
+ */
+export function getInputFromUser(query) {
+  let data
+  do {
+    data = readline.question(query);
+    if (!data) { console.log(chalk.red("Error receiving data, please enter again.")) }
+  }
+  while (!data)
+  return data;
 }
 
 export function getDifficultyChoice() {
