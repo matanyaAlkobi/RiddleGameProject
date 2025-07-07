@@ -1,19 +1,5 @@
 [
   {
-    "id": 2,
-    "name": "Friendly question",
-    "taskDescription": "What is my  name? ",
-    "correctAnswer": "matanya",
-    "difficulty": "medium"
-  },
-  {
-    "id": 3,
-    "name": "medium Math",
-    "taskDescription": "What is 8 * 5?",
-    "correctAnswer": "40",
-    "difficulty": "hard"
-  },
-  {
     "id": 4,
     "name": "aa",
     "taskDescription": "gg",
@@ -46,6 +32,13 @@
     "name": "j",
     "taskDescription": "s",
     "correctAnswer": "d",
+    "difficulty": "hard"
+  },
+  {
+    "id": 8,
+    "name": "2",
+    "taskDescription": "3",
+    "correctAnswer": "4",
     "difficulty": "hard"
   }
 ]

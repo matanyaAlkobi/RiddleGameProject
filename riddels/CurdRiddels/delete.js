@@ -1,6 +1,6 @@
 import loadRiddleDatabase from "./read.js"
 import { getInputFromUser } from "../../systemOprtion/uiManager.js"
-import {saveRiddlesToDB} from "./create.js"
+import {writeRiddlesToFile} from "./saveRiddlesToDB.js"
 
 
 /**
@@ -16,9 +16,10 @@ export async function deleteRiddleById(){
     const allRiddles = await loadRiddleDatabase();
     const idToDelete = Number(inputId);
     const updatedRiddles = allRiddles.filter(riddel =>{ return riddel.id !== idToDelete});
-    saveRiddlesToDB(updatedRiddles);
+    writeRiddlesToFile(updatedRiddles);
     }
     catch(err){
         console.error("Error deleting riddle:", err.message);
     }
 }
+await deleteRiddleById();
