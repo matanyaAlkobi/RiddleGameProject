@@ -1,6 +1,4 @@
 // Imports required modules for file system, input handling, paths, and styling
-import readline from "readline-sync";
-import chalk from "chalk";
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
 import { getInputFromUser, getDifficultyChoice} from "../../client/system Opretion/uiManager.js"
 import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
@@ -36,7 +34,7 @@ export async function createMenager() {
     await writeRiddlesToFile(riddles);
   }
   catch (err) {
-    throw new Error(chalk.red("Error: " + err.message));
+    console.error("Error: " + err.message);
   }
 
 }
