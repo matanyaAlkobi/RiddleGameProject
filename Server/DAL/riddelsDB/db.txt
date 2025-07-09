@@ -1,44 +1,30 @@
 [
   {
-    "id": 4,
-    "name": "aa",
-    "taskDescription": "gg",
-    "correctAnswer": "gg",
+    "id": 50,
+    "name": "jhgfdsa",
+    "taskDescription": "lkjhgfds",
+    "correctAnswer": "lkjhgfd",
     "difficulty": "hard"
   },
   {
-    "id": 5,
-    "name": "f",
-    "taskDescription": "yh",
-    "correctAnswer": "gg",
+    "id": 80,
+    "name": "jhgfdsa",
+    "taskDescription": "lkjhgfds",
+    "correctAnswer": "lkjhgfd",
     "difficulty": "hard"
   },
   {
-    "id": 6,
-    "name": "m",
-    "taskDescription": "d",
-    "correctAnswer": "d",
+    "id": 80,
+    "name": "jhgfdsa",
+    "taskDescription": "lkjhgfds",
+    "correctAnswer": "lkjhgfd",
     "difficulty": "hard"
   },
   {
-    "id": 6,
-    "name": "j",
-    "taskDescription": "d",
-    "correctAnswer": "d",
-    "difficulty": "hard"
-  },
-  {
-    "id": 7,
-    "name": "j",
-    "taskDescription": "s",
-    "correctAnswer": "d",
-    "difficulty": "hard"
-  },
-  {
-    "id": 8,
-    "name": "2",
-    "taskDescription": "3",
-    "correctAnswer": "4",
+    "id": 100,
+    "name": "jhgfdsa",
+    "taskDescription": "lkjhgfds",
+    "correctAnswer": "lkjhgfd",
     "difficulty": "hard"
   }
 ]

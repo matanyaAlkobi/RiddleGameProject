@@ -2,7 +2,7 @@ import readline from "readline-sync";
 import chalk from "chalk";
 
 export function printWelcome() {
-    console.log("Welcome to our game!");
+  console.log("Welcome to our game!");
 }
 
 /**
@@ -37,4 +37,32 @@ export function getDifficultyChoice() {
   while (!["hard", "easy", "medium"].includes(difficulty.toLowerCase()))
   return difficulty.toLowerCase();
 }
+
+
+export function showMenu() {
+  let choice;
+  do {
+    if (!["1", "2", "3", "4", "5", "6"].includes(choice) && choice !== undefined) {
+      console.log(chalk.red("Invalid choice. Please select a number between 1 and 6.\n"))
+    }
+    console.log(chalk.blue(`
+=== Riddle Game Menu ===
+    1. Play Riddles
+    2. Create a Riddle
+    3. View All Riddles
+    4. Update a Riddle
+    5. Delete a Riddle
+    6. Exit
+  `));
+
+
+    choice = readline.question("Choose an option (1-6): ")
+  }
+  while (!["1", "2", "3", "4", "5", "6"].includes(choice))
+  return choice;
+
+}
+
+
+
 
