@@ -1,26 +1,5 @@
 [
   {
-    "id": 50,
-    "name": "jhgfdsa",
-    "taskDescription": "lkjhgfds",
-    "correctAnswer": "lkjhgfd",
-    "difficulty": "hard"
-  },
-  {
-    "id": 80,
-    "name": "jhgfdsa",
-    "taskDescription": "lkjhgfds",
-    "correctAnswer": "lkjhgfd",
-    "difficulty": "hard"
-  },
-  {
-    "id": 80,
-    "name": "jhgfdsa",
-    "taskDescription": "lkjhgfds",
-    "correctAnswer": "lkjhgfd",
-    "difficulty": "hard"
-  },
-  {
     "id": 100,
     "name": "jhgfdsa",
     "taskDescription": "lkjhgfds",
@@ -47,12 +26,5 @@
     "correctAnswer": "h",
     "difficulty": "hard",
     "id": 103
-  },
-  {
-    "name": "d",
-    "taskDescription": "d",
-    "correctAnswer": "d",
-    "difficulty": "hard",
-    "id": 104
   }
 ]

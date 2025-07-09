@@ -2,6 +2,7 @@ import express from "express"
 import loadRiddleDatabase from "./DAL/CurdRiddels/read.js"
 import { createMenager } from "./service/service.createRiddle.js"
 import {riddleUpdate} from "./service/service.updateRiddle.js"
+import {deleteRiddleById} from "./service/service.deleteRiddle.js"
 const router = express.Router();
 
 
@@ -39,7 +40,7 @@ router.post('/create', async (req, res) => {
  * @body { name, taskDescription, correctAnswer, difficulty }
  * @returns {object} Success or error message
  */
-router.put('/update/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const idToUpdate = parseInt(req.params.id);
 
     try {
@@ -49,6 +50,17 @@ router.put('/update/:id', async (req, res) => {
         res.status(err.status || 500).json({ error: err.message });
     }
 });
+
+router.delete('/:id',async(req,res)=>{
+    const  idToDelete = parseInt(req.params.id);
+    try{
+        await deleteRiddleById(idToDelete);
+        res.status(200).json({message: "riddle  deleted successfully"})
+    }
+    catch(err){
+        res.status(err.status || 500).json({error: err.message})
+    }
+})
 
 
 

@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { showMenu, getInputFromUser } from "./uiManager.js";
-import {createRiddleHandler,viewRiddlesHandler, updateRiddleHandler} from "./riddleController.js"
+import {createRiddleHandler,viewRiddlesHandler, updateRiddleHandler,deleteRiddleHandler} from "./riddleController.js"
 
 
 export async function choiceHandler() {
@@ -31,6 +31,7 @@ export async function choiceHandler() {
 
             case "5":
                 console.log("You chose to delete a riddle.");
+                await deleteRiddleHandler();
                 break;
 
             case "6":

@@ -69,7 +69,7 @@ export function showMenu() {
  * @param {Array} riddles - Array of all riddle objects
  * @returns {Object} - New riddle object.
  */
-function createRiddle() {
+export function createRiddle() {
     const newObj = {}
     newObj.name = getInputFromUser("Enter riddle name: ");
     newObj.taskDescription = getInputFromUser("enter description: ");
@@ -79,7 +79,7 @@ function createRiddle() {
 }
 
 
-function askForRiddleId() {
+export function askForRiddleId() {
     {
         let inputId;
         let num = 1;
