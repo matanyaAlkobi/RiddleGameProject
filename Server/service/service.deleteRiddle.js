@@ -13,6 +13,9 @@ export async function deleteRiddleById(idFromServer){
     try{
     const allRiddles = await loadRiddleDatabase();
     const idToDelete = Number(idFromServer);
+    if (isNaN(idToDelete)) {
+      throw new Error("Provided ID is not a valid number.");
+    }
     const updatedRiddles = allRiddles.filter(riddel =>{ return riddel.id !== idToDelete});
     writeRiddlesToFile(updatedRiddles);
     }

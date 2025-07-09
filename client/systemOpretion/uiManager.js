@@ -64,5 +64,42 @@ export function showMenu() {
 }
 
 
+/**
+ * Gather riddle data from user input.
+ * @param {Array} riddles - Array of all riddle objects
+ * @returns {Object} - New riddle object.
+ */
+function createRiddle() {
+    const newObj = {}
+    newObj.name = getInputFromUser("Enter riddle name: ");
+    newObj.taskDescription = getInputFromUser("enter description: ");
+    newObj.correctAnswer = getInputFromUser("Enter a correct answer: ");
+    newObj.difficulty = getDifficultyChoice();
+    return newObj;
+}
+
+
+function askForRiddleId() {
+    {
+        let inputId;
+        let num = 1;
+        do {
+            inputId = getInputFromUser("Enter a id: ").trim();
+            num = Number(inputId)
+            if (!inputId) {
+                console.log(chalk.red("You must enter a valid ID."));
+                continue;
+            }
+
+            if (isNaN(num)) { console.log(chalk.red("You must enter a numeric ID.")); }
+
+        }
+        while (isNaN(num))
+        console.log(chalk.green("Valid number entered:"));
+        return num;
+    }
+}
+
+
 
 

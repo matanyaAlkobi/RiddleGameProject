@@ -27,7 +27,6 @@
     "correctAnswer": "lkjhgfd",
     "difficulty": "hard"
   },
-
   {
     "name": "jj",
     "taskDescription": "jj",
@@ -43,9 +42,9 @@
     "id": 102
   },
   {
-    "name": "ff",
-    "taskDescription": "ff",
-    "correctAnswer": "dd",
+    "name": "g",
+    "taskDescription": "h",
+    "correctAnswer": "h",
     "difficulty": "hard",
     "id": 103
   },

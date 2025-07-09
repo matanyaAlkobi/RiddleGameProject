@@ -3,12 +3,15 @@ import { getInputFromUser, getDifficultyChoice } from "../../client/systemOpreti
 import { writeRiddlesToFile } from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 
-async function riddleUpdate(id, newData) {
+export async function riddleUpdate(id, newData) {
     try {
+        let updatedChecker  = false;
         const idToUpdate = Number(id);
         const allRiddles = await loadRiddleDatabase();
         for (let i = 0; i < allRiddles.length; i++) {
+
             if (allRiddles[i].id === idToUpdate) {
+                updatedChecker = true;
                 for (const key in newData) {
                     if (key in allRiddles[i]) {
                         allRiddles[i][key] = newData[key];
@@ -17,11 +20,17 @@ async function riddleUpdate(id, newData) {
                 break;
             }
         }
+        if(!updatedChecker){
+            const err =new Error("There is no riddle with such an id.");
+            err.status = 404;
+            throw err;
+        }
         await writeRiddlesToFile(allRiddles)
         console.log("The riddle was successfully updated.")
     }
     catch (err) {
         console.error("Error updating the riddle", err.message)
+        throw err;
     }
 }
 
