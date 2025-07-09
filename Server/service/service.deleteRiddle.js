@@ -1,5 +1,4 @@
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import { getInputFromUser } from "../../client/systemOpretion/uiManager.js"
 import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 
@@ -10,11 +9,10 @@ import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
  * 3. Removes the matching riddle if it exists.
  * 4. Saves the updated list back to the database.
  */
-export async function deleteRiddleById(){
+export async function deleteRiddleById(idFromServer){
     try{
-    const inputId = getInputFromUser("Enter the id of the riddle to delete: ");
     const allRiddles = await loadRiddleDatabase();
-    const idToDelete = Number(inputId);
+    const idToDelete = Number(idFromServer);
     const updatedRiddles = allRiddles.filter(riddel =>{ return riddel.id !== idToDelete});
     writeRiddlesToFile(updatedRiddles);
     }
