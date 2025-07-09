@@ -26,5 +26,7 @@
     "taskDescription": "lkjhgfds",
     "correctAnswer": "lkjhgfd",
     "difficulty": "hard"
-  }
+  },
+  null,
+  null
 ]
