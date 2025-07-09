@@ -1,24 +1,9 @@
 // Imports required modules for file system, input handling, paths, and styling
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import { getInputFromUser, getDifficultyChoice} from "../../client/systemOpretion/uiManager.js"
 import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 
-/**
- * Gather riddle data from user input.
- * @param {Array} riddles - Array of all riddle objects
- * @returns {Object} - New riddle object.
- */
-function createRiddle(riddles) {
-  const maxID = riddles.length > 0 ? Math.max(...riddles.map(r => r.id)) : 0;
-  const newObj = {}
-  newObj.id = maxID + 1
-  newObj.name = getInputFromUser("Enter riddle name: ");
-  newObj.taskDescription = getInputFromUser("enter description: ");
-  newObj.correctAnswer = getInputFromUser("Enter a correct answer: ");
-  newObj.difficulty = getDifficultyChoice();
-  return newObj;
-}
+
 
 
 /**
@@ -29,8 +14,9 @@ function createRiddle(riddles) {
 export async function createMenager(newObj) {
   try {
     const riddles = await loadRiddleDatabase();
+    const maxID = riddles.length > 0 ? Math.max(...riddles.map(r => r.id)) : 0;
+    newObj.id = maxID + 1
     riddles.push(newObj);
-    console.log(riddles)
     await writeRiddlesToFile(riddles);
   }
   catch (err) {
@@ -39,4 +25,3 @@ export async function createMenager(newObj) {
 
 }
 
-await createMenager()
