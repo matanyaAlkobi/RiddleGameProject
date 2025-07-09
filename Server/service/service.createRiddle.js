@@ -1,6 +1,6 @@
 // Imports required modules for file system, input handling, paths, and styling
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import { getInputFromUser, getDifficultyChoice} from "../../client/system Opretion/uiManager.js"
+import { getInputFromUser, getDifficultyChoice} from "../../client/systemOpretion/uiManager.js"
 import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 
@@ -26,11 +26,11 @@ function createRiddle(riddles) {
  * loads database, collects new riddle, saves it.
  * @returns {Promise<void>}
  */
-export async function createMenager() {
+export async function createMenager(newObj) {
   try {
     const riddles = await loadRiddleDatabase();
-    const newObj = createRiddle(riddles);
     riddles.push(newObj);
+    console.log(riddles)
     await writeRiddlesToFile(riddles);
   }
   catch (err) {

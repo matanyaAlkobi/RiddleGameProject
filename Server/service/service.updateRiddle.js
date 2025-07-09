@@ -1,5 +1,5 @@
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import { getInputFromUser, getDifficultyChoice } from "../../client/system Opretion/uiManager.js"
+import { getInputFromUser, getDifficultyChoice } from "../../client/systemOpretion/uiManager.js"
 import { writeRiddlesToFile } from "../DAL/CurdRiddels/saveRiddlesToDB.js"
 
 

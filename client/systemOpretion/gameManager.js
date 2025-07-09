@@ -11,7 +11,7 @@ import  { allRiddles,Player, Riddle } from "../Modules/allModules.js";
  */
 export function startGame(){
     printWelcome();
-    const playerName = getInputFromUser();
+    const playerName = getInputFromUser("What is your name? ");
     const  player = new  Player(playerName);
     const levelchoise =  getDifficultyChoice();
     const selectedRiddles =  allRiddles.filter(riddle =>  riddle.difficulty === levelchoise);
