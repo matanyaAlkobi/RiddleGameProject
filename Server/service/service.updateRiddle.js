@@ -1,35 +1,34 @@
-import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import { getInputFromUser, getDifficultyChoice } from "../../client/systemOpretion/uiManager.js"
-import { writeRiddlesToFile } from "../DAL/CurdRiddels/saveToDB.js"
+import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
+import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js"
 
 
-export async function riddleUpdate(id, newData) {
+export async function UpdateDB(id, newData, dbPath) {
     try {
-        let updatedChecker  = false;
+        let updatedChecker = false;
         const idToUpdate = Number(id);
-        const allRiddles = await loadRiddleDatabase();
-        for (let i = 0; i < allRiddles.length; i++) {
+        const dataFromDB = await loadDataFromDatabase(dbPath);
+        for (let i = 0; i < dataFromDB.length; i++) {
 
-            if (allRiddles[i].id === idToUpdate) {
+            if (dataFromDB[i].id === idToUpdate) {
                 updatedChecker = true;
                 for (const key in newData) {
-                    if (key in allRiddles[i]) {
-                        allRiddles[i][key] = newData[key];
+                    if (key in dataFromDB[i]) {
+                        dataFromDB[i][key] = newData[key];
                     }
                 }
                 break;
             }
         }
-        if(!updatedChecker){
-            const err =new Error("There is no riddle with such an id.");
+        if (!updatedChecker) {
+            const err = new Error("There is no object with such an id.");
             err.status = 404;
             throw err;
         }
-        await writeRiddlesToFile(allRiddles)
-        console.log("The riddle was successfully updated.")
+        await writeToFile(dataFromDB, dbPath)
+        console.log("The object was successfully updated.")
     }
     catch (err) {
-        console.error("Error updating the riddle", err.message)
+        console.error("Error updating the object", err.message)
         throw err;
     }
 }
