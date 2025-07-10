@@ -1,23 +1,23 @@
 // Imports required modules for file system, input handling, paths, and styling
-import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveToDB.js"
+import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
+import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js"
 
 
 
 
 
 /**
- * Main function to manage the riddle creation process:
- * loads database, collects new riddle, saves it.
+ * Main function to manage the object creation process:
+ * loads database, collects new object, saves it.
  * @returns {Promise<void>}
  */
-export async function createMenager(newObj) {
+export async function createMenager(newObj, dbPath) {
   try {
-    const riddles = await loadRiddleDatabase();
-    const maxID = riddles.length > 0 ? Math.max(...riddles.map(r => r.id)) : 0;
+    const DBData = await loadDataFromDatabase(dbPath);
+    const maxID = DBData.length > 0 ? Math.max(...DBData.map(r => r.id)) : 0;
     newObj.id = maxID + 1
-    riddles.push(newObj);
-    await writeRiddlesToFile(riddles);
+    DBData.push(newObj);
+    await writeToFile(DBData, dbPath);
   }
   catch (err) {
     console.error("Error: " + err.message);
