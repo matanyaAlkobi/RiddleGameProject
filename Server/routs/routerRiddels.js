@@ -3,11 +3,11 @@ import { getAllRiddels,
      handleCreateRiddle,
       handleUpdateRiddle,
        handleDeleteRiddle }
-        from "./controller/riddels.controller.js";
+        from "../controller/riddels.controller.js";
 
 
 const router = express.Router();
-export default router;
+
 
 /**
  * @route GET /
@@ -40,3 +40,4 @@ router.delete('/:id', handleDeleteRiddle)
 
 
 
+export default router;

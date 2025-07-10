@@ -1,4 +1,4 @@
-import { Riddle } from "../Modules/allModules.js";
+import { Riddle } from "../Models/index.js";
 
 /**
  * Converts plain riddle data into a Riddle instance.
