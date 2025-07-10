@@ -10,7 +10,9 @@ server.use(express.json())
 // All routes starting with /riddels will be handled by riddelsRouter
 server.use("/riddels",riddelsRouter)
 
-
+/**
+ * Starts the server and listens on the specified port
+ */
 server.listen(PORT,()=>{
     console.log("server listening... ")
 })

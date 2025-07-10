@@ -5,10 +5,14 @@ import chalk from "chalk";
 
 
 
+
 /**
- * Save riddles array to the database file.
- * @param {Array} riddles - Array of all riddle objects to be saved.
+ * Saves an array of riddles to the database file as JSON.
+ *
+ * @param {Array} dataArray - Array of riddle objects to save
+ * @param {string} dbPath - Path to the database file
  * @returns {Promise<void>}
+ * @throws Throws an error if writing to the file fails
  */
 export async function writeToFile(dataArray,dbPath) {
   try {

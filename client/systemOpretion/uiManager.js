@@ -39,6 +39,10 @@ export function getDifficultyChoice() {
 }
 
 
+/**
+ * Displays the main menu and prompts the user to choose an option.
+ * @returns {string} User's menu choice between "1" and "6".
+ */
 export function showMenu() {
   let choice;
   do {
@@ -78,7 +82,10 @@ export function createRiddle() {
     return newObj;
 }
 
-
+/**
+ * Prompts the user to enter a valid numeric riddle ID.
+ * @returns {number} The validated numeric ID.
+ */
 export function askForRiddleId() {
     {
         let inputId;

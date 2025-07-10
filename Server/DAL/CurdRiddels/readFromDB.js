@@ -2,10 +2,11 @@ import fs from "fs/promises";
 
 
 /**
- * Reads a JSON-formatted text file from the given path,
- * parses its content, and returns the parsed data.
+ * Reads and parses JSON data from a file.
  *
- * @returns {Promise<any>} Parsed JSON data from the file, or error message if failed.
+ * @param {string} dbPath - Path to the JSON database file
+ * @returns {Promise<any>} Parsed JSON content from the file
+ * @throws Throws an error if reading or parsing fails
  */
 export default async function loadDataFromDatabase(dbPath) {
     try {
@@ -19,7 +20,6 @@ export default async function loadDataFromDatabase(dbPath) {
     }
 }
 
-// export const riddles = await loadRiddleDatabase()
-// console.log(riddles)
+
 
 
