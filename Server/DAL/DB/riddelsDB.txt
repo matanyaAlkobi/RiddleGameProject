@@ -1,12 +1,5 @@
 [
   {
-    "id": 100,
-    "name": "l",
-    "taskDescription": "l",
-    "correctAnswer": "l",
-    "difficulty": "hard"
-  },
-  {
     "name": "jj",
     "taskDescription": "jj",
     "correctAnswer": "jj",

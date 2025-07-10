@@ -29,5 +29,26 @@ export async function viewPlayersHandler() {
         .then(data => data.json())
         console.log(allPlayers)
 }
- await viewPlayersHandler();
+
+/**
+ * Sends a POST request to create a new riddle using user input.
+ */
+export async function createPlayerHandler() {
+    const newObj = {
+        name: "matan",
+        bestTime: 5,
+        id: 1
+    }
+    
+    const createResponse = await fetch("http://localhost:4545/player/create", {
+        method: "POST",
+        body: JSON.stringify(newObj),
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    }).then(data => data.json())
+    console.log(createResponse)
+}
+await createPlayerHandler();
 
