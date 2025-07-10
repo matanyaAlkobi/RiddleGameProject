@@ -1,6 +1,6 @@
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
 import { getInputFromUser, getDifficultyChoice } from "../../client/systemOpretion/uiManager.js"
-import { writeRiddlesToFile } from "../DAL/CurdRiddels/saveRiddlesToDB.js"
+import { writeRiddlesToFile } from "../DAL/CurdRiddels/saveToDB.js"
 
 
 export async function riddleUpdate(id, newData) {

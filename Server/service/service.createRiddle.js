@@ -1,6 +1,6 @@
 // Imports required modules for file system, input handling, paths, and styling
 import loadRiddleDatabase from "../DAL/CurdRiddels/read.js"
-import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveRiddlesToDB.js"
+import {writeRiddlesToFile} from "../DAL/CurdRiddels/saveToDB.js"
 
 
 

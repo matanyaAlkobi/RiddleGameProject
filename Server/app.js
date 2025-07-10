@@ -1,6 +1,6 @@
 import express from "express";
 
-import riddelsRouter from "./router.js";
+import riddelsRouter from "./routerRiddels.js";
 
 
 const PORT = 4545;

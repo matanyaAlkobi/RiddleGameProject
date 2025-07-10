@@ -7,7 +7,7 @@ import chalk from "chalk";
 // Set up the path to the riddle database file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const dbPath = path.resolve(__dirname, "../riddelsDB/db.txt");
+const dbPath = path.resolve(__dirname, "../DB/riddelsDB.txt");
 
 
 /**
