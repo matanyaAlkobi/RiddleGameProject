@@ -1,7 +1,7 @@
 import express from "express";
 
-import riddelsRouter from "./routerRiddels.js";
-
+import riddelsRouter from "./routs/routerRiddels.js";
+import playerRouter from "./routs/routerPlayer.js"
 
 const PORT = 4545;
 const server = express();
@@ -9,6 +9,7 @@ const server = express();
 server.use(express.json())
 // All routes starting with /riddels will be handled by riddelsRouter
 server.use("/riddels",riddelsRouter)
+server.use("/player",playerRouter)
 
 /**
  * Starts the server and listens on the specified port

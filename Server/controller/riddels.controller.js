@@ -1,7 +1,6 @@
 import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
-import { createMenager } from "../service/service.createRiddle.js"
-import { UpdateDB } from "../service/service.updateRiddle.js"
-import { deleteByIdSerch } from "../service/service.deleteRiddle.js"
+import { createMenager, UpdateDB, deleteByIdSerch } from "../service/riddle.service.js"
+
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -27,9 +26,9 @@ export async function getAllRiddels(req, res) {
  * @param {import('express').Request} req - Express request object containing riddle data in body
  * @param {import('express').Response} res - Express response object
  */
-expo
+
 export async function handleCreateRiddle(req, res) {
-    const { id, name, taskDescription, correctAnswer, difficulty } = req.body;
+    const { name, taskDescription, correctAnswer, difficulty } = req.body;
 
     if (
         typeof name !== "string" || name.trim() === "" ||
