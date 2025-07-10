@@ -86,7 +86,7 @@ export function createRiddle() {
  * Prompts the user to enter a valid numeric riddle ID.
  * @returns {number} The validated numeric ID.
  */
-export function askForRiddleId() {
+export function askForId() {
     {
         let inputId;
         let num = 1;
