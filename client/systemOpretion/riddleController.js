@@ -1,4 +1,8 @@
 import { createRiddle, askForRiddleId } from "./uiManager.js"
+
+/**
+ * Sends a POST request to create a new riddle using user input.
+ */
 export async function createRiddleHandler() {
     const newObj = createRiddle();
     const createResponse = await fetch("http://localhost:4545/riddels/create", {
@@ -12,13 +16,18 @@ export async function createRiddleHandler() {
     console.log(createResponse)
 }
 
-
+/**
+ * Fetches and logs all riddles from the server.
+ */
 export async function viewRiddlesHandler() {
     const allRiddels = await fetch("http://localhost:4545/riddels")
         .then(data => data.json())
     console.log(allRiddels)
 }
 
+/**
+ * Prompts for a riddle ID and updated data, then sends a PUT request to update the riddle.
+ */
 export async function updateRiddleHandler() {
     const inputId = askForRiddleId();
     const newUpdateriddle = createRiddle()
@@ -38,6 +47,10 @@ export async function updateRiddleHandler() {
     }
 }
 
+
+/**
+ * Prompts for a riddle ID and sends a DELETE request to remove the riddle.
+ */
 export async function deleteRiddleHandler() {
     const inputId = askForRiddleId();
     try{

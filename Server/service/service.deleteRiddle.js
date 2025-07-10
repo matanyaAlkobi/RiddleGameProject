@@ -2,12 +2,14 @@ import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
 import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js"
 
 
+
 /**
- * Deletes a object from the database by a user-provided ID.
- * 1. Prompts user for the ID.
- * 2. Loads current object from the database.
- * 3. Removes the matching object if it exists.
- * 4. Saves the updated list back to the database.
+ * Deletes an object by ID from the database.
+ *
+ * @param {number|string} idFromServer - ID of the object to delete (from request)
+ * @param {string} dbPath - Path to the database file
+ * @throws Will throw an error if ID is invalid or object not found
+ * @returns {Promise<void>}
  */
 export async function deleteByIdSerch(idFromServer, dbPath) {
   try {

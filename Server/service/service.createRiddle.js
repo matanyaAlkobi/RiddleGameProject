@@ -7,8 +7,11 @@ import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js"
 
 
 /**
- * Main function to manage the object creation process:
- * loads database, collects new object, saves it.
+ * Adds a new object to the database.
+ * Loads current data, assigns a new unique ID, saves updated data.
+ * 
+ * @param {Object} newObj - The new riddle object to add
+ * @param {string} dbPath - Path to the database file
  * @returns {Promise<void>}
  */
 export async function createMenager(newObj, dbPath) {

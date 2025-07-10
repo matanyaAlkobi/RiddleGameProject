@@ -2,7 +2,13 @@ import chalk from "chalk";
 import { showMenu, getInputFromUser } from "./uiManager.js";
 import {createRiddleHandler,viewRiddlesHandler, updateRiddleHandler,deleteRiddleHandler} from "./riddleController.js"
 
-
+/**
+ * Handles the main menu choice flow.
+ * Loops until user selects exit (option 6).
+ * Calls respective handlers based on user choice.
+ *
+ * @returns {Promise<void>}
+ */
 export async function choiceHandler() {
     let choice;
     do {
