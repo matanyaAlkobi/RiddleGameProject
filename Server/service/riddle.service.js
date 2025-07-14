@@ -21,8 +21,8 @@ export async function createMenager(newObj, dbPath) {
   }
   catch (err) {
     console.error("Error: " + err.message);
+    throw err;
   }
-
 }
 
 /**

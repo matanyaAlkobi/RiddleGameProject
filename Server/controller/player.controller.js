@@ -1,5 +1,5 @@
 import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
-import { createMenager, UpdateDB, deleteByIdSerch } from "../service/riddle.service.js"
+import { createPlayerMenager } from "../service/player.service.js"
 
 
 import path from "path";
@@ -22,16 +22,21 @@ export async function getAllPlayers(req, res) {
 
 
 export async function handleCreatePlayer(req, res) {
-    const { name, bestTime,id} = req.body;
+    try {
+        const { name, bestTime, id } = req.body;
+        if (
+            typeof name !== "string" || name.trim() === "" ||
+            typeof bestTime !== "number"
+                ) {
+            return res.status(400).json({ error: "Invalid player data" });
+        }
+        const player = await createPlayerMenager(req.body, dbPlayerPath);
+        return res.json(player);
+    }
+    catch (err) {
+        console.error(err.message);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 
-    // if (
-    //     typeof name !== "string" || name.trim() === "" ||
-    //     typeof bestTime !== "number" ||
-    //     typeof id !== "number"
-    // ){
-    //     return res.status(400).json({ error: "Invalid riddle data" });
-    // }
-    await createMenager(req.body, dbPlayerPath);
-    res.status(201).json({ message: "Player saved successfully!", player: req.body });
 
 }

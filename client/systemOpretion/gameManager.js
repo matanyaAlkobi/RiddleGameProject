@@ -1,7 +1,7 @@
 
 import { getInputFromUser, getDifficultyChoice, printWelcome } from "./uiManager.js";
 import { createRiddleFromData, handleRiddleSession } from "./riddleService.js"
-import { Riddle ,Player} from "../Models/index.js";
+import { Riddle, Player } from "../Models/index.js";
 
 /**
  * Starts the riddle game.
@@ -15,9 +15,9 @@ export function startGame() {
     const playerName = getInputFromUser("What is your name? ");
 
     const playerID = askForId();
-    const  player = new  Player(playerName);
-    const levelchoise =  getDifficultyChoice();
-    const selectedRiddles =  allRiddles.filter(riddle =>  riddle.difficulty === levelchoise);
+    const player = new Player(playerName);
+    const levelchoise = getDifficultyChoice();
+    const selectedRiddles = allRiddles.filter(riddle => riddle.difficulty === levelchoise);
 
     const riddleInstances = selectedRiddles.map(riddle => createRiddleFromData(riddle));
     riddleInstances.forEach(riddle => { handleRiddleSession(riddle, player) });
@@ -27,7 +27,7 @@ export function startGame() {
 export async function viewPlayersHandler() {
     const allPlayers = await fetch("http://localhost:4545/player")
         .then(data => data.json())
-        console.log(allPlayers)
+    console.log(allPlayers)
 }
 
 /**
@@ -37,9 +37,8 @@ export async function createPlayerHandler() {
     const newObj = {
         name: "matan",
         bestTime: 5,
-        id: 1
     }
-    
+
     const createResponse = await fetch("http://localhost:4545/player/create", {
         method: "POST",
         body: JSON.stringify(newObj),
@@ -47,8 +46,16 @@ export async function createPlayerHandler() {
             "Content-Type": "application/json"
         }
 
-    }).then(data => data.json())
-    console.log(createResponse)
+    })
+    if (!createResponse.ok) {
+        const text = await createResponse.text();
+        console.error("Server error or invalid response:", text);
+        return;
+    }
+    const data = await createResponse.json();
+    console.log(data.player)
+    return  data;
+
 }
 await createPlayerHandler();
 
