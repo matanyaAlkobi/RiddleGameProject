@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllPlayers, handleCreatePlayer } from "../controller/player.controller.js";
+import { getAllPlayers, handleCreatePlayer,  handleUpdatePlayer} from "../controller/player.controller.js";
 
 
 const router = express.Router()
@@ -12,6 +12,14 @@ router.get("/",getAllPlayers)
  * @access Publicn
  */
 router.post('/create', handleCreatePlayer)
+
+
+/**
+ * @route PUT /:id
+ * @desc Update a player by ID
+ * @access Public
+ */
+router.put('/:id', handleUpdatePlayer);
 
 
 

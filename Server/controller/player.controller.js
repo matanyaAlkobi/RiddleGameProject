@@ -1,5 +1,5 @@
 import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
-import { createPlayerMenager } from "../service/player.service.js"
+import { createPlayerMenager ,  updatePlayerDB} from "../service/player.service.js"
 
 
 import path from "path";
@@ -37,6 +37,15 @@ export async function handleCreatePlayer(req, res) {
         console.error(err.message);
         return res.status(500).json({ error: "Internal server error" });
     }
+}
 
 
+export async function handleUpdatePlayer(req, res) {
+    const idToUpdate = parseInt(req.params.id);
+    try {
+        await updatePlayerDB(idToUpdate, req.body, dbPlayerPath);
+        res.status(200).json({ message: "Player updated successfully" });
+    } catch (err) {
+        res.status(err.status || 500).json({ error: err.message });
+    }
 }

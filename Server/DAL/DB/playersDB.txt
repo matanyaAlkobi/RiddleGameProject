@@ -1,13 +1,18 @@
 [
   {
     "name": "matan",
-    "bestTime": 5,
-    "id": 1
+    "bestTime": 1,
+    "id": 1,
+    "answeredRiddles": [
+      "r1",
+      "r2"
+    ]
   },
   {
     "name": "mat",
     "bestTime": 5,
-    "id": 2
+    "id": 2,
+    "answeredRiddles": []
   },
   {
     "name": "mat",

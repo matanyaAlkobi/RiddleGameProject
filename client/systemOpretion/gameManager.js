@@ -1,5 +1,5 @@
 
-import { getInputFromUser, getDifficultyChoice, printWelcome } from "./uiManager.js";
+import { getInputFromUser, getDifficultyChoice, printWelcome, askForId} from "./uiManager.js";
 import { createRiddleFromData, handleRiddleSession } from "./riddleService.js"
 import { Riddle, Player } from "../Models/index.js";
 
@@ -57,5 +57,29 @@ export async function createPlayerHandler() {
     return  data;
 
 }
-await createPlayerHandler();
 
+export async function updatePlayerHandler() {
+    const inputId = askForId();
+    const newUpdateriddle = {
+    "name": "new",
+    "bestTime": 1,
+    "answeredRiddles":["r1","r2"]
+    
+  }
+    try {
+        const updatedResponse = await fetch(`http://localhost:4545/player/${inputId}`, {
+            method: "PUT",
+            body: JSON.stringify(newUpdateriddle),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+        console.log(updatedResponse)
+    }
+    catch (err) {
+        console.error("Failed to update player:", err.message);
+    }
+}
+
+await updatePlayerHandler();
