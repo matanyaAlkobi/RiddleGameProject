@@ -30,9 +30,9 @@ export async function loadDataFromDatabase() {
  * @throws {Error} Throws an error if the insertion operation fails.
  */
 
-export async function createRiddle(report) {
+export async function createRiddle(riddle) {
   try {
-    const createResult = await collection.insertOne({ report });
+    const createResult = await collection.insertOne(riddle);
     console.log(
       chalk.green(
         "The new data has been successfully entered into the database."
