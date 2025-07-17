@@ -1,6 +1,13 @@
-import {loadDataFromDatabase,createRiddle} from "../DAL/riddelDAL.js";
-import { createMenager, UpdateDB, deleteByIdSerch } from "../service/riddle.service.js";
-
+import {
+  loadDataFromDatabase,
+  createRiddle,
+  deleteRiddleById,
+} from "../DAL/riddelDAL.js";
+import {
+  createMenager,
+  UpdateDB,
+  deleteByIdSerch,
+} from "../service/riddle.service.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -9,21 +16,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const dbRiddlePath = path.resolve(__dirname, "../DAL/DB/riddelsDB.txt");
 
-
 /**
  * Retrieve all riddles from the database.
  * @param {import('express').Request} req - Express request object
  * @param {import('express').Response} res - Express response object
  */
 export async function getAllRiddels(req, res) {
-    try{
+  try {
     const riddles = await loadDataFromDatabase();
-    res.json(riddles)
-    }
-    catch(err){
-        console.error("falid to read from db: ",err)
-        throw err;
-    }
+    res.json(riddles);
+  } catch (err) {
+    console.error("falid to read from db: ", err);
+    throw err;
+  }
 }
 
 /**
@@ -33,21 +38,24 @@ export async function getAllRiddels(req, res) {
  */
 
 export async function handleCreateRiddle(req, res) {
-    const { name, taskDescription, correctAnswer, difficulty } = req.body;
+  const { name, taskDescription, correctAnswer, difficulty } = req.body;
 
-    if (
-        typeof name !== "string" || name.trim() === "" ||
-        typeof taskDescription !== "string" || taskDescription.trim() === "" ||
-        typeof correctAnswer !== "string" || correctAnswer.trim() === "" ||
-        !["easy", "medium", "hard"].includes(difficulty)
-    ) {
-        return res.status(400).json({ error: "Invalid riddle data" });
-    }
-    await createRiddle(req.body);
-    res.status(201).json({ message: "Riddle saved successfully!", riddle: req.body });
-
+  if (
+    typeof name !== "string" ||
+    name.trim() === "" ||
+    typeof taskDescription !== "string" ||
+    taskDescription.trim() === "" ||
+    typeof correctAnswer !== "string" ||
+    correctAnswer.trim() === "" ||
+    !["easy", "medium", "hard"].includes(difficulty)
+  ) {
+    return res.status(400).json({ error: "Invalid riddle data" });
+  }
+  await createRiddle(req.body);
+  res
+    .status(201)
+    .json({ message: "Riddle saved successfully!", riddle: req.body });
 }
-
 
 /**
  * Update an existing riddle by ID.
@@ -55,28 +63,30 @@ export async function handleCreateRiddle(req, res) {
  * @param {import('express').Response} res - Express response object
  */
 export async function handleUpdateRiddle(req, res) {
-    const idToUpdate = parseInt(req.params.id);
+  const idToUpdate = parseInt(req.params.id);
 
-    try {
-        await UpdateDB(idToUpdate, req.body, dbRiddlePath);
-        res.status(200).json({ message: "Riddle updated successfully" });
-    } catch (err) {
-        res.status(err.status || 500).json({ error: err.message });
-    }
+  try {
+    await UpdateDB(idToUpdate, req.body, dbRiddlePath);
+    res.status(200).json({ message: "Riddle updated successfully" });
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message });
+  }
 }
 
 /**
- * Delete a riddle by ID.
- * @param {import('express').Request} req - Express request object with params
- * @param {import('express').Response} res - Express response object
+ * Deletes a single riddle from the database using its ID.
+ *
+ * @function deleteRiddleHandler
+ * @param {import('express').Request} req - Express request object, expects `id` param.
+ * @param {import('express').Response} res - Express response object.
+ * @returns {void} Sends a JSON response with success or error message.
  */
-export async function handleDeleteRiddle(req, res) {
-    const idToDelete = parseInt(req.params.id);
-    try {
-        await deleteByIdSerch(idToDelete, dbRiddlePath);
-        res.status(200).json({ message: "riddle  deleted successfully" })
-    }
-    catch (err) {
-        res.status(err.status || 500).json({ error: err.message })
-    }
+export async function deleteRiddleHandler(req, res) {
+  try {
+    const deletedRiddle = await deleteRiddleById(req.params.id);
+     if(deletedRiddle) res.status(200).json({ message: "Riddle deleted successfully." });
+     else  res.status(200).json({message: "No matching id found."})
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message });
+  }
 }
