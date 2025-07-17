@@ -1,4 +1,4 @@
-import {loadDataFromDatabase,} from "../DAL/riddelDAL.js";
+import {loadDataFromDatabase,createRiddle} from "../DAL/riddelDAL.js";
 import { createMenager, UpdateDB, deleteByIdSerch } from "../service/riddle.service.js";
 
 
@@ -43,7 +43,7 @@ export async function handleCreateRiddle(req, res) {
     ) {
         return res.status(400).json({ error: "Invalid riddle data" });
     }
-    await createMenager(req.body, dbRiddlePath);
+    await createRiddle(req.body);
     res.status(201).json({ message: "Riddle saved successfully!", riddle: req.body });
 
 }
