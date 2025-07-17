@@ -10,15 +10,13 @@ import { ObjectId } from "mongodb";
  * @returns {Promise<Array>} An array of riddle documents from the database.
  * @throws {Error} If the database connection or fetch fails.
  */
-export default async function loadDataFromDatabase() {
+export async function loadDataFromDatabase() {
   try {
     const data = await collection.find().toArray();
     return data;
   } catch (err) {
     console.error("Failed to load DB: " + err.message);
     throw err;
-  } finally {
-    await client.close();
   }
 }
 
@@ -45,8 +43,6 @@ export async function createRiddle(report) {
   } catch (err) {
     console.error("Failed to create a riddle:", err);
     throw err;
-  } finally {
-    await client.close();
   }
 }
 
@@ -58,20 +54,14 @@ export async function createRiddle(report) {
  */
 export async function deleteRiddleById(id) {
   try {
-
     const result = await collection.deleteOne({ _id: new ObjectId(id) });
 
     return result.deletedCount === 1;
   } catch (err) {
     console.error("Failed to delete riddle:", err);
     throw err;
-  } finally {
-    await client.close();
   }
 }
-
-
-
 
 /**
  * Updates specific fields of a riddle document in the database by its ID.
@@ -95,7 +85,5 @@ export async function updateRiddleById(id, updatedFields) {
   } catch (err) {
     console.error("Failed to update riddle:", err);
     throw err;
-  } finally {
-    await client.close();
   }
 }
