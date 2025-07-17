@@ -1,11 +1,6 @@
 import fs from "fs/promises";
 import chalk from "chalk";
 
-
-
-
-
-
 /**
  * Saves an array of riddles to the database file as JSON.
  *
