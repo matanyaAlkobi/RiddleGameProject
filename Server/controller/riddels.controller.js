@@ -1,5 +1,5 @@
-import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js"
-import { createMenager, UpdateDB, deleteByIdSerch } from "../service/riddle.service.js"
+import {loadDataFromDatabase,} from "../DAL/riddelDAL.js";
+import { createMenager, UpdateDB, deleteByIdSerch } from "../service/riddle.service.js";
 
 
 import path from "path";
@@ -16,9 +16,14 @@ const dbRiddlePath = path.resolve(__dirname, "../DAL/DB/riddelsDB.txt");
  * @param {import('express').Response} res - Express response object
  */
 export async function getAllRiddels(req, res) {
-    const riddles = await loadDataFromDatabase(dbRiddlePath);
-
+    try{
+    const riddles = await loadDataFromDatabase();
     res.json(riddles)
+    }
+    catch(err){
+        console.error("falid to read from db: ",err)
+        throw err;
+    }
 }
 
 /**
