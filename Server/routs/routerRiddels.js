@@ -3,7 +3,7 @@ import {
   getAllRiddels,
   handleCreateRiddle,
   handleUpdateRiddle,
-  handleDeleteRiddle,
+  deleteRiddleHandler,
 } from "../controller/riddels.controller.js";
 
 const router = express.Router();
@@ -34,6 +34,6 @@ router.put("/:id", handleUpdateRiddle);
  * @desc Delete a riddle by ID
  * @access Public
  */
-router.delete("/:id", handleDeleteRiddle);
+router.delete("/:id", deleteRiddleHandler);
 
 export default router;
