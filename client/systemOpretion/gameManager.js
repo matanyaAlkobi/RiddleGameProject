@@ -27,7 +27,7 @@ export function startGame() {
 export async function viewPlayersHandler() {
     const allPlayers = await fetch("http://localhost:4545/player")
         .then(data => data.json())
-    console.log(allPlayers)
+    console.log(JSON.stringify(allPlayers));
 }
 
 /**
