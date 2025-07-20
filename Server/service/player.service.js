@@ -1,14 +1,13 @@
 import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js";
 import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js";
-``
+``;
 import { supabase } from "../lib/supabase.js";
 export async function createPlayerMenager(playerData) {
   try {
     const { data: existingPlayers, error: selectError } = await supabase
       .from("players")
       .select("*")
-      .eq("name", playerData.name.toLowerCase())
-      .eq("bestTime", playerData.bestTime);
+      .eq("name", playerData.name.toLowerCase());
 
     if (selectError) throw selectError;
     if (existingPlayers.length > 0) {
@@ -21,10 +20,11 @@ export async function createPlayerMenager(playerData) {
         {
           name: playerData.name.toLowerCase(),
           bestTime: playerData.bestTime,
+          answeredRiddles: playerData.answeredRiddles,
         },
       ])
       .select()
-      .single();
+      .maybeSingle();
     if (insertError) throw insertError;
 
     return { status: "created", player: newPlayer };
