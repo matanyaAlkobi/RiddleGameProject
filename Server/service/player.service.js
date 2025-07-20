@@ -1,21 +1,35 @@
 import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js";
 import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js";
-
-export async function createPlayerMenager(playerData, dbPath) {
+``
+import { supabase } from "../lib/supabase.js";
+export async function createPlayerMenager(playerData) {
   try {
-    const DBData = await loadDataFromDatabase(dbPath);
+    const { data: existingPlayers, error: selectError } = await supabase
+      .from("players")
+      .select("*")
+      .eq("name", playerData.name.toLowerCase())
+      .eq("bestTime", playerData.bestTime);
 
-    const existingPlayer = findExistingPlayer(playerData, DBData);
-    if (existingPlayer) {
-      return { status: "exists", player: existingPlayer };
+    if (selectError) throw selectError;
+    if (existingPlayers.length > 0) {
+      return { status: "exists", player: existingPlayers[0] };
     }
-    const maxID = DBData.length > 0 ? Math.max(...DBData.map((r) => r.id)) : 0;
-    playerData.id = maxID + 1;
-    DBData.push(playerData);
-    await writeToFile(DBData, dbPath);
-    return { status: "created", playerData };
+
+    const { data: newPlayer, error: insertError } = await supabase
+      .from("players")
+      .insert([
+        {
+          name: playerData.name.toLowerCase(),
+          bestTime: playerData.bestTime,
+        },
+      ])
+      .select()
+      .single();
+    if (insertError) throw insertError;
+
+    return { status: "created", player: newPlayer };
   } catch (err) {
-    console.error("Error: " + err.message);
+    console.error("Supabase error:", err.message);
     throw err;
   }
 }
@@ -28,7 +42,7 @@ export async function updatePlayerDB(id, newData, dbPath) {
   try {
     const idToUpdate = Number(id);
     const dataFromDB = await loadDataFromDatabase(dbPath);
-    const updatedPlayers  = updatePlayerData(dataFromDB,idToUpdate,newData)
+    const updatedPlayers = updatePlayerData(dataFromDB, idToUpdate, newData);
     await writeToFile(updatedPlayers, dbPath);
     console.log("The object was successfully updated.");
   } catch (err) {
@@ -36,7 +50,6 @@ export async function updatePlayerDB(id, newData, dbPath) {
     throw err;
   }
 }
-
 
 function updatePlayerData(players, id, newData) {
   const index = players.findIndex((player) => player.id === id);
