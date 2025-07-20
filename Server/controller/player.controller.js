@@ -21,22 +21,20 @@ export async function getAllPlayers(req, res) {
 }
 
 
-export async function handleCreatePlayer(req, res) {
-    try {
-        const { name, bestTime, id } = req.body;
-        if (
-            typeof name !== "string" || name.trim() === "" ||
-            typeof bestTime !== "number"
-                ) {
-            return res.status(400).json({ error: "Invalid player data" });
-        }
-        const player = await createPlayerMenager(req.body, dbPlayerPath);
-        return res.json(player);
+export async function getAllPlayers(req, res) {
+  try {
+    const { data, error } = await supabase.from("players").select("*");
+
+    if (error) {
+      throw new Error(`Error connecting to database: ${error.message}`);
     }
-    catch (err) {
-        console.error(err.message);
-        return res.status(500).json({ error: "Internal server error" });
-    }
+    
+
+    res.status(200).json(data);
+  } catch (err) {
+    console.error("Database fetch error:", err.message);
+    res.status(500).json({ error: "Failed to fetch players" });
+  }
 }
 
 
