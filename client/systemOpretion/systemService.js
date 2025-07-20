@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import { showMenu, getInputFromUser } from "./uiManager.js";
-import {createRiddleHandler,viewRiddlesHandler, updateRiddleHandler,deleteRiddleHandler} from "./riddleController.js"
+import {createRiddleHandler,viewRiddlesHandler, updateRiddleHandler,deleteRiddleHandler} from "./riddleController.js";
+import  {startGame}  from './gameManager.js'
 
 /**
  * Handles the main menu choice flow.
@@ -17,6 +18,7 @@ export async function choiceHandler() {
 
             case "1":
                 console.log("You chose to play riddles.");
+                await startGame()
                 break;
 
             case "2":
@@ -26,7 +28,7 @@ export async function choiceHandler() {
 
             case "3":
                 console.log("You chose to view all riddles.");
-                await viewRiddlesHandler();
+                console.log(await viewRiddlesHandler());
                 break;
 
             case "4":

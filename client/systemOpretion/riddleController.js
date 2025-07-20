@@ -15,14 +15,20 @@ export async function createRiddleHandler() {
   console.log(createResponse);
 }
 
-/**
- * Fetches and logs all riddles from the server.
- */
 export async function viewRiddlesHandler() {
-  const allRiddels = await fetch("http://localhost:4545/riddels").then((data) =>
-    data.json()
-  );
-  console.log(allRiddels);
+  try {
+    const response = await fetch("http://localhost:4545/riddels");
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch riddles: ${response.status}`);
+    }
+
+    const allRiddles = await response.json();
+    return allRiddles;
+  } catch (err) {
+    console.error("Error fetching riddles:", err.message);
+    return [];
+  }
 }
 
 /**
