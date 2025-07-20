@@ -2,6 +2,7 @@ import {
   loadDataFromDatabase,
   createRiddle,
   deleteRiddleById,
+  updateRiddleById,
 } from "../DAL/riddelDAL.js";
 import {
   createMenager,
@@ -63,11 +64,15 @@ export async function handleCreateRiddle(req, res) {
  * @param {import('express').Response} res - Express response object
  */
 export async function handleUpdateRiddle(req, res) {
-  const idToUpdate = parseInt(req.params.id);
-
   try {
-    await UpdateDB(idToUpdate, req.body, dbRiddlePath);
-    res.status(200).json({ message: "Riddle updated successfully" });
+    const CheckingIfItHasBeenUpdated = await updateRiddleById(
+      req.params.id,
+      req.body
+    );
+    if (CheckingIfItHasBeenUpdated)
+      res.status(200).json({ message: "Riddle updated successfully" });
+    else
+      res.status(200).json({ message: "No such riddle was found to update." });
   } catch (err) {
     res.status(err.status || 500).json({ error: err.message });
   }
@@ -84,8 +89,9 @@ export async function handleUpdateRiddle(req, res) {
 export async function deleteRiddleHandler(req, res) {
   try {
     const deletedRiddle = await deleteRiddleById(req.params.id);
-     if(deletedRiddle) res.status(200).json({ message: "Riddle deleted successfully." });
-     else  res.status(200).json({message: "No matching id found."})
+    if (deletedRiddle)
+      res.status(200).json({ message: "Riddle deleted successfully." });
+    else res.status(200).json({ message: "No matching id found." });
   } catch (err) {
     res.status(err.status || 500).json({ error: err.message });
   }
