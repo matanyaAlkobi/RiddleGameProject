@@ -54,3 +54,26 @@ export async function handleUpdatePlayer(req, res) {
     res.status(err.status || 500).json({ error: err.message });
   }
 }
+
+export async function getPlayerByUsername(req, res) {
+  const playerName = req.params.username;
+  try {
+    const { data, error } = await supabase
+      .from("players")
+      .select()
+      .eq("name", playerName)
+      .single();
+
+    if (error) {
+      console.error("Error fetching player:", error.message);
+      return res.status(500).json({ error: "Database error" });
+    }
+    if (!data) {
+      return res.status(404).json({ error: "Player not found" });
+    }
+    return res.status(200).json({ player: data });
+  } catch (err) {
+    console.error("Unexpected error:", err.message);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}

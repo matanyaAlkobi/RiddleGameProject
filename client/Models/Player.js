@@ -6,9 +6,10 @@ export class Player{
      * Creates a new Player instance.
      * @param {string} name - The name of the player.
      */
-    constructor(name){
+    constructor(name,answeredRiddles){
         this.name = name;
         this.times = [];
+        this.answeredRiddles = answeredRiddles;
     }
 
         /**
