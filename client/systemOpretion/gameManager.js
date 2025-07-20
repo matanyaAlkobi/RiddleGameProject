@@ -10,11 +10,11 @@ import { Riddle, Player } from "../Models/index.js";
  * - Runs through all riddles one by one.
  * - Displays the total and average time at the end.
  */
-export function startGame() {
+export async function startGame() {
     printWelcome();
     const playerName = getInputFromUser("What is your name? ");
-
     const playerID = askForId();
+    await  viewAllPlayersHandler();
     const player = new Player(playerName);
     const levelchoise = getDifficultyChoice();
     const selectedRiddles = allRiddles.filter(riddle => riddle.difficulty === levelchoise);
@@ -24,7 +24,7 @@ export function startGame() {
     player.showStatus();
 }
 
-export async function viewPlayersHandler() {
+export async function viewAllPlayersHandler() {
     const allPlayers = await fetch("http://localhost:4545/player")
         .then(data => data.json())
     console.log(JSON.stringify(allPlayers));
@@ -82,4 +82,4 @@ export async function updatePlayerHandler() {
     }
 }
 
-await updatePlayerHandler();
+await viewAllPlayersHandler();
