@@ -6,7 +6,7 @@ import {
 } from "./uiManager.js";
 import { createRiddleFromData, handleRiddleSession } from "./riddleService.js";
 import { Riddle, Player } from "../Models/index.js";
-import {viewRiddlesHandler} from './riddleController.js'
+import { viewRiddlesHandler } from "./riddleController.js";
 
 /**
  * Starts the riddle game.
@@ -18,11 +18,11 @@ import {viewRiddlesHandler} from './riddleController.js'
 export async function startGame() {
   printWelcome();
   const playerName = getInputFromUser("What is your name? ");
-//   const playerID = askForId();
-  const result = await checkIfPlayerExists();
-  let player;``
-  if (result.exists) {
+  //   const playerID = askForId();
+  const result = await checkIfPlayerExists(playerName);
+  let player;
 
+  if (result.exists) {
     player = new Player(result.player.name, result.player.answeredRiddles);
   } else {
     player = new Player(playerName, []);
@@ -33,16 +33,28 @@ export async function startGame() {
     (riddle) => riddle.difficulty === levelchoise
   );
   const unansweredRiddles = selectedRiddles.filter(
-    (riddle) => !player.answeredRiddles.includes(riddle.id)
+    (riddle) => !player.answeredRiddles.includes(riddle._id)
   );
 
-  const riddleInstances = selectedRiddles.map((riddle) =>
+  const riddleInstances = unansweredRiddles.map((riddle) =>
     createRiddleFromData(riddle)
   );
   riddleInstances.forEach((riddle) => {
     handleRiddleSession(riddle, player);
   });
-  player.showStatus();
+  const gameTime = player.showStatus();
+
+  if (!result.exists) {
+    console.log("unansweredRiddles:", unansweredRiddles);
+
+    console.log("selectedRiddles:", selectedRiddles);
+    await createPlayerHandler({
+      name: playerName,
+      bestTime: gameTime.avg,
+      answeredRiddles: JSON.stringify(unansweredRiddles.map((r) => r._id)),
+    });
+  } else {
+  }
 }
 
 export async function viewAllPlayersHandler() {
@@ -55,12 +67,9 @@ export async function viewAllPlayersHandler() {
 /**
  * Sends a POST request to create a new riddle using user input.
  */
-export async function createPlayerHandler() {
-  const newObj = {
-    name: "matan",
-    bestTime: 5,
-  };
-
+export async function createPlayerHandler(newObj) {
+  console.log(`sending... ${JSON.stringify(newObj)}`);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const createResponse = await fetch("http://localhost:4545/player/create", {
     method: "POST",
     body: JSON.stringify(newObj),
@@ -101,10 +110,10 @@ export async function updatePlayerHandler() {
     console.error("Failed to update player:", err.message);
   }
 }
-export async function checkIfPlayerExists() {
+export async function checkIfPlayerExists(playerName) {
   try {
     const getPlayerResponse = await fetch(
-      "http://localhost:4545/player/username/matan"
+      `http://localhost:4545/player/username/${playerName}`
     );
     if (getPlayerResponse.status === 404) {
       console.log("Player does not exist");
@@ -121,4 +130,3 @@ export async function checkIfPlayerExists() {
     return { exists: false };
   }
 }
-console.log(await checkIfPlayerExists());
