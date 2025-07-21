@@ -23,6 +23,6 @@ router.post("/create", handleCreatePlayer);
  * @desc Update a player by ID
  * @access Public
  */
-router.put("/:id", handleUpdatePlayer);
+router.put("/:name", handleUpdatePlayer);
 
 export default router;

@@ -29,19 +29,15 @@ export async function getAllPlayers(req, res) {
 
 export async function handleCreatePlayer(req, res) {
   try {
-        console.log("Received request to create player:", req.body);  
-
-    let { name, bestTime, answeredRiddles} = req.body;
-    bestTime = Number(bestTime)
+    const { name, bestTime } = req.body;
     if (
       typeof name !== "string" ||
       name.trim() === "" ||
-      typeof bestTime !== "number"||
-      isNaN(bestTime)
+      typeof bestTime !== "number"
     ) {
       return res.status(400).json({ error: "Invalid player data" });
     }
-    const player = await createPlayerMenager({ name, bestTime, answeredRiddles});
+    const player = await createPlayerMenager({ name, bestTime });
     return res.status(200).json(player);
   } catch (err) {
     console.error(err.message);
@@ -66,7 +62,7 @@ export async function getPlayerByUsername(req, res) {
       .from("players")
       .select()
       .eq("name", playerName)
-      .maybeSingle();
+      .single();
 
     if (error) {
       console.error("Error fetching player:", error.message);
