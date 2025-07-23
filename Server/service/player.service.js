@@ -20,7 +20,6 @@ export async function createPlayerMenager(playerData) {
         {
           name: playerData.name.toLowerCase(),
           bestTime: playerData.bestTime,
-          answeredRiddles: playerData.answeredRiddles,
         },
       ])
       .select()
@@ -38,15 +37,18 @@ function findExistingPlayer(playerToCheck, playersList) {
   return playersList.find((player) => player.name === playerToCheck.name);
 }
 
-export async function updatePlayerDB(id, newData, dbPath) {
+export async function updatePlayerDB(name, newData) {
   try {
-    const idToUpdate = Number(id);
-    const dataFromDB = await loadDataFromDatabase(dbPath);
-    const updatedPlayers = updatePlayerData(dataFromDB, idToUpdate, newData);
-    await writeToFile(updatedPlayers, dbPath);
+    const { data, error } = await supabase
+      .from("players")
+      .update({ bestTime: newData.bestTime })
+      .eq("name", name);
+    if (error) {
+      throw new Error("Error updating value:", error);
+    }
     console.log("The object was successfully updated.");
-  } catch (err) {
-    console.error("Error updating the object", err.message);
+  } catch (error) {
+    console.error("Error updating the object", error.message);
     throw err;
   }
 }
