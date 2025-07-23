@@ -74,7 +74,7 @@ export async function deleteRiddleById(id) {
  * @throws {Error} Throws an error if the update operation fails.
  */
 
-export async function updateRiddleById(id, updatedFields) {
+export async function updateRiddleByName(id, updatedFields) {
   try {
     const result = await collection.updateOne(
       { _id: new ObjectId(id) },

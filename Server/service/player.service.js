@@ -1,7 +1,5 @@
-import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js";
-import { writeToFile } from "../DAL/CurdRiddels/saveToDB.js";
-``;
 import { supabase } from "../lib/supabase.js";
+
 export async function createPlayerMenager(playerData) {
   try {
     const { data: existingPlayers, error: selectError } = await supabase
@@ -33,10 +31,6 @@ export async function createPlayerMenager(playerData) {
   }
 }
 
-function findExistingPlayer(playerToCheck, playersList) {
-  return playersList.find((player) => player.name === playerToCheck.name);
-}
-
 export async function updatePlayerDB(name, newData) {
   try {
     const { data, error } = await supabase
@@ -53,20 +47,4 @@ export async function updatePlayerDB(name, newData) {
   }
 }
 
-function updatePlayerData(players, id, newData) {
-  const index = players.findIndex((player) => player.id === id);
 
-  if (index === -1) {
-    const err = new Error("There is no object with such an id.");
-    err.status = 404;
-    throw err;
-  }
-
-  players[index].answeredRiddles.push(...newData.answeredRiddles);
-
-  if (players[index].bestTime > newData.bestTime) {
-    players[index].bestTime = newData.bestTime;
-  }
-
-  return players;
-}
