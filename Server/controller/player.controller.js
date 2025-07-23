@@ -1,4 +1,3 @@
-import loadDataFromDatabase from "../DAL/CurdRiddels/readFromDB.js";
 import {
   createPlayerMenager,
   updatePlayerDB,

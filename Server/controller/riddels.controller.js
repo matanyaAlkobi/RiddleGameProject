@@ -2,20 +2,11 @@ import {
   loadDataFromDatabase,
   createRiddle,
   deleteRiddleById,
-  updateRiddleById,
+  updateRiddleByName,
 } from "../DAL/riddelDAL.js";
-import {
-  createMenager,
-  UpdateDB,
-  deleteByIdSerch,
-} from "../service/riddle.service.js";
 
-import path from "path";
-import { fileURLToPath } from "url";
-// Set up the path to the riddle database file
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dbRiddlePath = path.resolve(__dirname, "../DAL/DB/riddelsDB.txt");
+
+
 
 /**
  * Retrieve all riddles from the database.
@@ -65,7 +56,7 @@ export async function handleCreateRiddle(req, res) {
  */
 export async function handleUpdateRiddle(req, res) {
   try {
-    const CheckingIfItHasBeenUpdated = await updateRiddleById(
+    const CheckingIfItHasBeenUpdated = await updateRiddleByName(
       req.params.id,
       req.body
     );
