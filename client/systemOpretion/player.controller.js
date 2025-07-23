@@ -30,7 +30,9 @@ export async function createPlayerHandler(newObj) {
 
 export async function updatePlayerHandler(name, newData) {
   try {
+    await  new Promise(resolve => setTimeout(resolve,1000))
     const updatedResponse = await fetch(
+      
       `http://localhost:4545/player/${name}`,
       {
         method: "PUT",
@@ -48,7 +50,7 @@ export async function updatePlayerHandler(name, newData) {
     }
 
     const newResponse = await updatedResponse.json();
-    console.log("Player updated:", newResponse);
+    console.log("response: ", newResponse);
   } catch (err) {
     console.error("Failed to update player:", err.message);
   }

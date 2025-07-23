@@ -46,14 +46,25 @@ export async function handleCreatePlayer(req, res) {
 }
 
 export async function handleUpdatePlayer(req, res) {
-  const idToUpdate = parseInt(req.params.id);
+  const nameToUpdate = req.params.name;
   try {
-    await updatePlayerDB(idToUpdate, req.body, dbPlayerPath);
-    res.status(200).json({ message: "Player updated successfully" });
+    const { data, error } = await supabase
+      .from("players")
+      .select("bestTime")
+      .eq("name", nameToUpdate)
+      .single();
+    if (error) return res.status(404).json({ error: "Player not found" });
+
+    if (req.body.bestTime < data.bestTime) {
+      await updatePlayerDB(nameToUpdate, req.body);
+      return res.status(200).json({ message: "Player updated successfully" });
+    }
+    res.status(200).json({ message: "You didn't beat the record." });
   } catch (err) {
     res.status(err.status || 500).json({ error: err.message });
   }
 }
+
 
 export async function getPlayerByUsername(req, res) {
   const playerName = req.params.username;
@@ -62,7 +73,7 @@ export async function getPlayerByUsername(req, res) {
       .from("players")
       .select()
       .eq("name", playerName)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error("Error fetching player:", error.message);

@@ -23,7 +23,7 @@ export async function startGame() {
   let player;
 
   if (result.exists) {
-    player = new Player(result.player.name, result.player.answeredRiddles);
+    player = new Player(result.player.name);
   } else {
     player = new Player(playerName, []);
   }
@@ -32,11 +32,11 @@ export async function startGame() {
   const selectedRiddles = allRiddles.filter(
     (riddle) => riddle.difficulty === levelchoise
   );
-  const unansweredRiddles = selectedRiddles.filter(
-    (riddle) => !player.answeredRiddles.includes(riddle._id)
-  );
+  // const unansweredRiddles = selectedRiddles.filter(
+  //   (riddle) => !player.answeredRiddles.includes(riddle._id)
+  // );
 
-  const riddleInstances = unansweredRiddles.map((riddle) =>
+  const riddleInstances = selectedRiddles.map((riddle) =>
     createRiddleFromData(riddle)
   );
   riddleInstances.forEach((riddle) => {
@@ -45,17 +45,16 @@ export async function startGame() {
   const gameTime = player.showStatus();
 
   if (!result.exists) {
-    console.log("unansweredRiddles:", unansweredRiddles);
 
     console.log("selectedRiddles:", selectedRiddles);
     await createPlayerHandler({
       name: playerName,
       bestTime: gameTime.avg,
-      answeredRiddles: JSON.stringify(unansweredRiddles.map((r) => r._id)),
+      // answeredRiddles: JSON.stringify(unansweredRiddles.map((r) => r._id)),
     });
   } else {
+    console.log(`It took you an average of ${gameTime.avg} seconds to answer each question.`)
     await updatePlayerHandler(playerName, {
-      answeredRiddles: unansweredRiddles.map((r) => r._id),
       bestTime: gameTime.avg,
     });
   }
