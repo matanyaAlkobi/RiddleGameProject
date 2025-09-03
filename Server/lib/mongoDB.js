@@ -1,4 +1,8 @@
 import "dotenv/config";
+
+console.log("Mongo URI:", process.env.MONGO_URI);
+
+
 import { MongoClient } from "mongodb";
 
 const client = new MongoClient(process.env.MONGO_URI);
