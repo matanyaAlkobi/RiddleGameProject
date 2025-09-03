@@ -9,9 +9,6 @@ import { handleUserRegistration } from "../DAL/users.DAL.js";
 const router = express.Router();
 
 
-
-
-
 // Signup
 router.post("/signup", async (req, res) => {
   try {
