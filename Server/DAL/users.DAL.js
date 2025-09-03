@@ -5,26 +5,30 @@ export async function handleUserRegistration(user) {
     const { data: existingData, error: selectError } = await supabase
       .from("users")
       .select("*")
-      .eq("name", user.name.toLowerCase());
+      .eq("username", user.username.toLowerCase());
 
     if (selectError) throw selectError;
+
     if (existingData.length > 0) {
-      return { status: "exists", player: existingData[0] };
+      return { status: "exists", user: existingData[0] };
     }
 
     const { data: newUser, error: insertError } = await supabase
       .from("users")
       .insert([
         {
-          name: user.name.toLowerCase(),
-          password: user.password,
+          username: user.username.trim().toLowerCase(),
+          password: user.hashedPassword,
+          email: user.email.trim().toLowerCase(),
+          role:"user"
         },
       ])
       .select()
       .maybeSingle();
+
     if (insertError) throw insertError;
 
-    return { status: "created", player: newUser };
+    return { status: "created", user: newUser };
   } catch (err) {
     console.error("Supabase error:", err.message);
     throw err;

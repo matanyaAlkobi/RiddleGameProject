@@ -14,6 +14,10 @@ import {
  * @param {import('express').Response} res - Express response object
  */
 export async function getAllRiddels(req, res) {
+  if(req.user.role != "admin" && req.user.role != "user")
+  {
+    return res.status(403).res.json({message:"Unauthorized"})
+  }
   try {
     const riddles = await loadDataFromDatabase();
     res.json(riddles);
