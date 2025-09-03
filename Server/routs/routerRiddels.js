@@ -5,6 +5,7 @@ import {
   handleUpdateRiddle,
   deleteRiddleHandler,
 } from "../controller/riddels.controller.js";
+import { authenticateUser } from "../auth/auth.js";
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ const router = express.Router();
  * @desc Get all riddles
  * @access Public
  */
-router.get("/", getAllRiddels);
+router.get("/",authenticateUser, getAllRiddels);
 
 /**
  * @route POST /create

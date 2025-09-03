@@ -4,13 +4,21 @@ import riddelsRouter from "./routs/routerRiddels.js";
 import playerRouter from "./routs/routerPlayer.js";
 import userRouter from "./routs/user.route.js";
 import { connectToMongo } from "./lib/mongoDB.js";
-
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const server = express();
-console.log("Server PORT:", process.env.SERVER_PORT);
 
-// Middleware to parse incoming JSON requests
+server.use(cors({
+  origin: 'http://localhost:5175', // or ['http://localhost:5175', 'http://localhost:3000']
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
+
+// Middleware
 server.use(express.json());
+server.use(cookieParser());
 
 // All routes starting with /riddels will be handled by riddelsRouter
 server.use("/riddels", riddelsRouter);

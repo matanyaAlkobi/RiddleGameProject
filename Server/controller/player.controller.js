@@ -13,6 +13,7 @@ const dbPlayerPath = path.resolve(__dirname, "../DAL/DB/playersDB.txt");
 
 export async function getAllPlayers(req, res) {
   try {
+
     const { data, error } = await supabase.from("players").select("*");
 
     if (error) {
