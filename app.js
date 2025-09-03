@@ -10,7 +10,13 @@ import cors from "cors";
 const server = express();
 
 server.use(cors({
-  origin: 'http://localhost:5175', // or ['http://localhost:5175', 'http://localhost:3000']
+  origin: [
+    'http://localhost:5175',
+    'http://localhost:5174', 
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://riddlegameproject.onrender.com'
+  ],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
