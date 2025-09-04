@@ -17,7 +17,8 @@ server.use(cors({
     'http://localhost:5173',
     'http://localhost:3000',
     'https://riddlegameproject.onrender.com',
-    'https://app.netlify.com/projects/riddles-game-app/overview'
+    'https://app.netlify.com/projects/riddles-game-app/overview',
+    'https://riddles-game-app.netlify.app'
   ],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
