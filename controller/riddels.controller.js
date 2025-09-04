@@ -14,18 +14,24 @@ import {
  * @param {import('express').Response} res - Express response object
  */
 export async function getAllRiddels(req, res) {
-  if(req.user.role != "admin" && req.user.role != "user")
-  {
-    return res.status(403).res.json({message:"Unauthorized"})
+  console.log("📢 getAllRiddels called by user:", req.user);
+
+  if (req.user.role !== "admin" && req.user.role !== "user") {
+    console.log(`🚫 Unauthorized access attempt by user with role: ${req.user.role}`);
+    return res.status(403).json({ message: "Unauthorized" });
   }
+
   try {
+    console.log("🔄 Loading riddles from database...");
     const riddles = await loadDataFromDatabase();
+    console.log(`✅ Successfully loaded ${riddles.length} riddles`);
     res.json(riddles);
   } catch (err) {
-    console.error("falid to read from db: ", err);
-    throw err;
+    console.error("❌ Failed to read from database:", err);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
+
 
 /**
  * Validate and create a new riddle.
