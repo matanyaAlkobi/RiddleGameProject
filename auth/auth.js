@@ -1,3 +1,6 @@
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+
 export const authenticateUser = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).json({ error: "Unauthorized" });

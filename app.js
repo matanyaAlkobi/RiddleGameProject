@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 const server = express();
+server.use(cookieParser());
 
 server.use(cors({
   origin: [
@@ -24,7 +25,6 @@ server.use(cors({
 
 // Middleware
 server.use(express.json());
-server.use(cookieParser());
 
 // All routes starting with /riddels will be handled by riddelsRouter
 server.use("/riddels", riddelsRouter);
